@@ -45,7 +45,8 @@ GO
 SELECT * FROM logs
 
 BEGIN TRANSACTION
-DELETE FROM logs WHERE "user"='hack3r' OR id <= 3
+DELETE FROM logs WHERE "user"='hack3r'
+DELETE TOP(3) FROM logs;
 COMMIT TRANSACTION;
 
 SELECT * FROM logs
