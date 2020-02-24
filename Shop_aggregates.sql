@@ -40,15 +40,22 @@ INSERT INTO Achat (FK_ProductID, DateAchat) VALUES (1, '2019-11-11'), (4, '2019-
 
 
 
-SELECT cat.Name AS Category, COUNT(ac.AchatID) AS Number_Purchases
+SELECT cat.Name AS Category, COUNT(*) AS Number_Purchases
 FROM Achat AS ac
 INNER JOIN Product AS p ON p.ProductID = ac.FK_ProductID
 INNER JOIN Category AS cat ON cat.CategoryID = p.FK_CategoryID
 GROUP BY cat.Name
-
+GO
 
 SELECT cat.Name AS Category, SUM(p.Prix) AS Total_Paid$
 FROM Achat AS ac
 INNER JOIN Product AS p ON p.ProductID = ac.FK_ProductID
 INNER JOIN Category AS cat ON cat.CategoryID = p.FK_CategoryID
 GROUP BY cat.Name
+GO
+
+SELECT YEAR(DateAchat) AS 'Year', COUNT(*) AS '#Purchases'
+FROM Achat 
+WHERE YEAR(DateAchat) = 2019 OR YEAR(DateAchat) = 2020
+GROUP BY YEAR(DateAchat)
+GO
