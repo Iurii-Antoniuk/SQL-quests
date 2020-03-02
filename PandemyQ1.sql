@@ -31,9 +31,9 @@ INSERT INTO City(name, FK_Country_id) VALUES ('Paris', 1),('Strasbourg',1),
                                              ('Berlin', 2),('Cologne', 2),
                                              ('Rome', 3),('Florence', 3),
                                              ('Washington', 4),('New York', 4),
-                                             ('Pékin', 5),('Shangaï', 5),
-                                             ('St-Pétersbourg', 6),('Moscou', 6)
-INSERT INTO Pharmaceutical(disease, count) VALUES ('Triméthylaminurie', 50)
+                                             ('PÃ©kin', 5),('ShangaÃ¯', 5),
+                                             ('St-PÃ©tersbourg', 6),('Moscou', 6)
+INSERT INTO Pharmaceutical(disease, count) VALUES ('TrimÃ©thylaminurie', 50)
 GO
 
 Declare @number_person INT = 0
@@ -43,7 +43,7 @@ Declare @fk_cityid INT = 1
 WHILE(@number_person <= 10)
 BEGIN
    Declare @name VARCHAR(20) = 'Individual' + CONVERT(VARCHAR, @name_suffix)
-   INSERT INTO Person ([name], is_infected, FK_city_id) VALUES (@name, @number_person % 2, @fk_cityid)
+   INSERT INTO Person ([name], is_infected, FK_city_id) VALUES (@name, FLOOR(RAND()*(1-0+1))+0, @fk_cityid)
    SET @name_suffix = @name_suffix + 1
    SELECT @number_person = (SELECT COUNT(person_id) FROM Person WHERE FK_city_id = @fk_cityid)
 
@@ -86,10 +86,3 @@ END
 CLOSE @CountryCursor;
 DEALLOCATE @CountryCursor;
 GO
-
-
-
-
-
-
-
