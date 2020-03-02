@@ -68,10 +68,10 @@ WHILE @@FETCH_STATUS = 0
 BEGIN
    declare @cases_perCountry int
    set @cases_perCountry = (SELECT COUNT(*) AS Number_Infected FROM Person
-							INNER JOIN City ON City.city_id = Person.FK_city_id
-							INNER JOIN Country ON Country.country_id = City.FK_country_id
-							WHERE Person.is_infected = 1 AND Country.country_id = @country_id
-							GROUP BY Country.name)
+				INNER JOIN City ON City.city_id = Person.FK_city_id
+				INNER JOIN Country ON Country.country_id = City.FK_country_id
+				WHERE Person.is_infected = 1 AND Country.country_id = @country_id
+				GROUP BY Country.name)
 	if (@cases_perCountry >= @avg_country)
 	BEGIN
 		SELECT City.[name] AS City, COUNT(*) AS Number_Infected
